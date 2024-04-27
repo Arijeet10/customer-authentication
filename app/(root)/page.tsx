@@ -14,9 +14,9 @@ const Homepage = () => {
 
   const [loading,setLoading]=useState(false);
 
-  useEffect(() => {
-    console.log(customer);
-  }, [customer]);
+  // useEffect(() => {
+  //   console.log(customer);
+  // }, [customer]);
 
   //fetch customer details when page renders
   useEffect(() => {
@@ -70,3 +70,5 @@ const Homepage = () => {
 };
 
 export default Homepage;
+export const dynamic = 'force-dynamic'
+
