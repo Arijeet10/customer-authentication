@@ -28,7 +28,19 @@ npm install
 yarn
 ```
 
-7. After installing all the necessary node packages, enter the following command to run the app on your local server.
+7. Next, create a environment variable file (.env) on the root folder of the app where package.json file is present.
+
+8. Add the following data in the .env file and fill up the variables with your data.
+
+```bash
+MONGODB_URL=
+NEXT_PUBLIC_ROOT_URL=
+TOKEN_SECRET=
+EMAIL=
+EMAIL_PASS=
+```
+
+8. After adding the necessary environment variable, enter the following command to run the app on your local server.
 
 ```bash
 npm run dev
@@ -36,7 +48,7 @@ npm run dev
 yarn dev
 ```
 
-8. Finally, go the localhost url shown in the terminal on your web browser to use the app.
+9. Finally, go the localhost url shown in the terminal on your web browser to use the app.
 
 
 
