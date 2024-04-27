@@ -66,7 +66,7 @@ const SigninForm = () => {
   
       } catch (error) {
         //login unsuccessful
-        console.log(error);
+        //console.log(error);
         const axiosError=error as AxiosError<ApiResponse>;
         let errorMsg=axiosError.response?.data.message;
   

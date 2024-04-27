@@ -81,10 +81,10 @@ const SignupForm = () => {
 
   //sign in with customer credentials
   const handleSubmit = async () => {
-    console.log(signupData);
+    //console.log(signupData);
 
     if(signupData.email==""||signupData.firstname==""||signupData.lastname==""||signupData.password==""){
-      toast.error("Please fill all the required data")
+      toast.error("Please fill all the required fields")
     }else if(signupData.password!==confirmPassword){
       toast.error("Passwords do not match")
     }else{
@@ -104,7 +104,7 @@ const SignupForm = () => {
         }
       } catch (error) {
         //signup unsuccessful
-        console.log(error);
+        //console.log(error);
         const axiosError=error as AxiosError<ApiResponse>;
         let errorMsg=axiosError.response?.data.message;
   

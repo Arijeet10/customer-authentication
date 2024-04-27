@@ -7,7 +7,6 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ImUserPlus } from "react-icons/im";
 import { IoCheckmark } from "react-icons/io5";
-import Loading from "./Loading";
 import { ApiResponse } from "@/types/ApiResponse";
 
 const CustomerProfileCard = ({
@@ -46,7 +45,7 @@ const CustomerProfileCard = ({
         }
       } catch (error) {
       //update password unsuccessful
-      console.log(error);
+      //console.log(error);
       const axiosError=error as AxiosError<ApiResponse>;
       let errorMsg=axiosError.response?.data.message;
 
@@ -68,7 +67,7 @@ const CustomerProfileCard = ({
         <div className="text-3xl font-bold">Customer Profile</div>
         <div>
           {/* profile image and name section */}
-          <div className="flex gap-4 flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div className="py-2 flex gap-4 flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center  gap-4">
               <div className="w-20 h-20 border rounded-full">
                 <ImUserPlus className=" p-4 w-full h-full " />

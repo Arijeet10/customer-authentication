@@ -10,7 +10,7 @@ const VerifyEmailCard = () => {
   //get email from parameter
   const { email } = useParams<{ email: string }>();
   const emailId = email?.replace("%40", "@");
-  console.log(emailId);
+  //console.log(emailId);
 
   //for navigation
   const router = useRouter();
@@ -20,7 +20,7 @@ const VerifyEmailCard = () => {
 
   //verify customer
   const handleSubmit = async () => {
-    console.log(emailId, verifyCode);
+    //console.log(emailId, verifyCode);
     const payload = { email: emailId, verifyCode };
     try {
       //verify customer api request
@@ -35,7 +35,7 @@ const VerifyEmailCard = () => {
       }
     } catch (error) {
       //verification unsuccessful
-      console.log(error);
+      //console.log(error);
       
       const axiosError=error as AxiosError<ApiResponse>;
       let errorMsg=axiosError.response?.data.message;

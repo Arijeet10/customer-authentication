@@ -22,7 +22,7 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
 
     //logout user
     const handleLogOut=async()=>{
-        console.log("logging out")
+        //console.log("logging out")
 
         try {
 
@@ -44,7 +44,7 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
         } catch (error) {
 
           //logout error
-          console.log(error)
+          //console.log(error)
           const axiosError=error as AxiosError<ApiResponse>;
           let errorMsg=axiosError.response?.data.message;
     

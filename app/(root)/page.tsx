@@ -14,11 +14,11 @@ const Homepage = () => {
 
   const [loading,setLoading]=useState(false);
 
-  useEffect(() => {
-    console.log(customer);
-  }, [customer]);
+  // useEffect(() => {
+  //   console.log(customer);
+  // }, [customer]);
 
-  
+
 //function to get customer details
   const fetchCustomerDetails=async()=>{
     try {
@@ -26,7 +26,7 @@ const Homepage = () => {
       //get customer details api request
       const res = await axios.get("/api/auth/customer");
 
-      console.log(res)
+      //console.log(res)
 
       if (res.status) {
         //customer details fetching successful
@@ -37,7 +37,7 @@ const Homepage = () => {
       }
     } catch (error) {
       //customer details fetching unsuccessful
-      console.log(error);
+      //console.log(error);
       toast.error("Error fetching Customer Details");
     }finally{
       setLoading(false)
