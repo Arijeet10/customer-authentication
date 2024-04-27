@@ -71,7 +71,7 @@ export async function POST(req:NextRequest){
         response.cookies.set("token",token,{
             httpOnly:true,
             secure:true,
-            sameSite:'none'
+            sameSite:'none',
         });
 
         return response;
