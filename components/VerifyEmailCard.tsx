@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const VerifyEmailCard = () => {
 
-  const [loading,setLoading]=useState(true);
+  const [loading,setLoading]=useState(false);
 
   //get email from parameter
   const { email } = useParams<{ email: string }>();
