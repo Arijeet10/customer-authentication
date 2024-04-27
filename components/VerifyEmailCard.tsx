@@ -7,6 +7,9 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const VerifyEmailCard = () => {
+
+  const [loading,setLoading]=useState(false);
+
   //get email from parameter
   const { email } = useParams<{ email: string }>();
   const emailId = email?.replace("%40", "@");
@@ -23,6 +26,9 @@ const VerifyEmailCard = () => {
     //console.log(emailId, verifyCode);
     const payload = { email: emailId, verifyCode };
     try {
+
+      setLoading(true)
+
       //verify customer api request
       const res = await axios.post("/api/auth/verify", payload);
 
@@ -41,6 +47,8 @@ const VerifyEmailCard = () => {
       let errorMsg=axiosError.response?.data.message;
 
       toast.error("Verification Error: "+errorMsg,{duration:3000})
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -85,14 +93,22 @@ const VerifyEmailCard = () => {
           </div>
         </div>
 
-        {/* Sign up button */}
         <div className="font-medium flex flex-col gap-2">
-          <input
+          {loading ? (
+            <div className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]">Verifying Customer Email</div>
+          ):(
+            <>
+            {/* Sign up button */}
+            <input
             type="submit"
             value="Sign Up"
             className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
             onClick={() => handleSubmit()}
           />
+            </>
+
+          )}
+
         </div>
       </form>
     </>

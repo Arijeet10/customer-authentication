@@ -116,7 +116,7 @@ const CustomerProfileCard = ({
 
                 {/* Email Verification */}
                 {customer?.isVerified ? (
-                  <div className="border rounded-full border-blue-500 absolute left-[100px] top-[12px]">
+                  <div className="border rounded-full border-blue-500 absolute left-[110px] top-[12px]">
                     <IoCheckmark className="w-4 h-4 text-blue-500" />
                   </div>
                 ) : (
