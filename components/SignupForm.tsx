@@ -135,7 +135,7 @@ const SignupForm = () => {
               type="text"
               placeholder="First Name"
               required
-              className="p-2 focus:outline-none"
+              className="p-2 w-full focus:outline-none"
               value={signupData.firstname}
               onChange={(e) =>
                 setSignupData({ ...signupData, firstname: e.target.value })
@@ -149,7 +149,7 @@ const SignupForm = () => {
               type="text"
               placeholder="Last Name"
               required
-              className="p-2 focus:outline-none"
+              className="p-2 w-full focus:outline-none"
               value={signupData.lastname}
               onChange={(e) =>
                 setSignupData({ ...signupData, lastname: e.target.value })
@@ -163,7 +163,7 @@ const SignupForm = () => {
               type={passwordInputType}
               placeholder="Password"
               required
-              className="p-2 focus:outline-none "
+              className="p-2 w-full focus:outline-none "
               value={signupData.password}
               onChange={(e) =>
                 setSignupData({ ...signupData, password: e.target.value })
@@ -186,7 +186,7 @@ const SignupForm = () => {
               type={confirmPasswordInputType}
               placeholder="Retype Password"
               required
-              className="p-2 focus:outline-none "
+              className="p-2 w-full focus:outline-none "
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -277,7 +277,7 @@ const SignupForm = () => {
               type="email"
               placeholder="Email"
               required
-              className="p-2 focus:outline-none"
+              className="p-2 w-full focus:outline-none"
               value={signupData.email}
               onChange={(e) =>
                 setSignupData({ ...signupData, email: e.target.value })

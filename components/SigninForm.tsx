@@ -88,7 +88,7 @@ const SigninForm = () => {
             <input
               type="email"
               placeholder="Email"
-              className="focus:outline-none"
+              className="w-full focus:outline-none"
               value={signinData.email}
               onChange={(e) =>
                 setSigninData({ ...signinData, email: e.target.value })
@@ -101,7 +101,7 @@ const SigninForm = () => {
             <input
               type={inputType}
               placeholder="Password"
-              className="focus:outline-none "
+              className="w-full focus:outline-none "
               value={signinData.password}
               onChange={(e) =>
                 setSigninData({ ...signinData, password: e.target.value })

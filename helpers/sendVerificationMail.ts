@@ -1,19 +1,38 @@
-import { resend } from "@/libs/resend";
+// import { resend } from "@/libs/resend";
+
+import nodemailer from "nodemailer"
+import { render } from "@react-email/render"; 
 
 import VerificationEmail from "@/emails/verificationEmail";
 import { ApiResponse } from "@/types/ApiResponse";
+
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASS,
+    }
+});
+
 
 export async function sendVerificationMail(
     email:string,
     firstname:string,
     verifyCode:string
 ):Promise<ApiResponse>{
+
+    const emailHtml=render(VerificationEmail({firstname,otp:verifyCode}))
+
     try {
-        await resend.emails.send({
-            from:"onboarding@resend.dev",
+
+        await transporter.sendMail({
+            from:process.env.EMAIL,
             to:email,
             subject:"Email OTP Verification",
-            react:VerificationEmail({firstname,otp:verifyCode}),
+            html:emailHtml, 
         })
 
         return {message:"Verification Mail send successfully",success:true}
