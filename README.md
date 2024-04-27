@@ -3,11 +3,12 @@ Live URL - https://customer-authentication.vercel.app/
 To run the app on localserver, follow these steps:
 
 1. Copy the GitHub Repository URL.
-2. Go to the directory on your local server and open terminal.
 
 ```bash
 https://github.com/Arijeet10/customer-authentication.git
 ```
+
+2. Go to the directory on your local server and open terminal.
 
 3. Type git clone and paste the url you copied earlier.
 
@@ -16,7 +17,9 @@ git clone https://github.com/Arijeet10/customer-authentication.git
 ```
 
 4. Press Enter to clone the repository in your local folder.
+
 5. Then, open the cloned repository from terminal using cd command.
+
 6. Now, install the node packages by entering the following command.
 
 ```bash
