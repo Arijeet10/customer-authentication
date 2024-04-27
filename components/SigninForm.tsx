@@ -88,7 +88,7 @@ const SigninForm = () => {
       <div className="px-8 py-6 border rounded-lg shadow-lg">
         {/* Form Header */}
         <div className="font-bold text-3xl">
-          <div>
+          <div className="text-[#3A244A]">
             Fill what we know <span className="text-[#D72638]">!</span>
           </div>
         </div>

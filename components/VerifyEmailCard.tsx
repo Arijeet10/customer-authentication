@@ -61,7 +61,7 @@ const VerifyEmailCard = () => {
       >
         {/* Form Header */}
         <div className="flex items-end justify-between">
-          <div className="font-bold text-3xl">
+          <div className="font-bold text-3xl text-[#3A244A]">
             Let us know <span className="text-[#D72638]">!</span>
           </div>
 
