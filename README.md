@@ -1,4 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Live URL - https://customer-authentication.vercel.app/
+
+To run the app on localserver, follow these steps:
+
+1. Copy the GitHub Repository URL.
+2. Go to the directory on your local server and open terminal.
+
+```bash
+https://github.com/Arijeet10/customer-authentication.git
+```
+
+3. Type git clone and paste the url you copied earlier.
+
+```bash
+git clone https://github.com/Arijeet10/customer-authentication.git
+```
+
+4. Press Enter to clone the repository in your local folder.
+5. Then, open the cloned repository from terminal using cd command.
+6. Now, install the node packages by entering the following command.
+
+```bash
+npm install
+# or
+yarn
+```
+
+7. After installing all the necessary node packages, enter the following command to run the app on your local server.
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+8. Finally, go the localhost url shown in the terminal on your web browser to use the app.
+
+
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).'
 
 ## Getting Started
 
