@@ -66,14 +66,13 @@ export async function POST(req:NextRequest){
             success:true
         })
 
-        //set cookie options
-        const cookiesOption={
-            httpOnly:true,
-            secure:true
-        }
 
         //save token in cookies
-        response.cookies.set("token",token,cookiesOption);
+        response.cookies.set("token",token,{
+            httpOnly:true,
+            secure:true,
+            sameSite:'none'
+        });
 
         return response;
 

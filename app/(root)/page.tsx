@@ -70,5 +70,4 @@ const Homepage = () => {
 };
 
 export default Homepage;
-export const dynamic = 'force-dynamic'
 
