@@ -18,31 +18,34 @@ const Homepage = () => {
     console.log(customer);
   }, [customer]);
 
+
+  const fetchCustomerDetails=async()=>{
+    try {
+      setLoading(true)
+      //get customer details api request
+      const res = await axios.get("/api/auth/customer");
+
+      console.log(res)
+
+      if (res.status) {
+        //customer details fetching successful
+        toast.success(res.data.message);
+        setCustomer(res.data.user);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      //customer details fetching unsuccessful
+      console.log(error);
+      toast.error("Error fetching Customer Details");
+    }finally{
+      setLoading(false)
+    }
+  }
+
   //fetch customer details when page renders
   useEffect(() => {
-    (async function getCustomerDetails() {
-      try {
-        setLoading(true)
-        //get customer details api request
-        const res = await axios.get("/api/auth/customer");
-
-        console.log(res)
-
-        if (res.status) {
-          //customer details fetching successful
-          toast.success(res.data.message);
-          setCustomer(res.data.user);
-        } else {
-          toast.error(res.data.message);
-        }
-      } catch (error) {
-        //customer details fetching unsuccessful
-        console.log(error);
-        toast.error("Error fetching Customer Details");
-      }finally{
-        setLoading(false)
-      }
-    })();
+    fetchCustomerDetails();
   }, []);
 
   return (
