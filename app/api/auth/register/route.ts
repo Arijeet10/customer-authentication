@@ -12,6 +12,16 @@ export async function POST(req: NextRequest) {
     //get data from api request
     const { firstname, lastname, password, contact, email } = await req.json();
 
+    //check if data is given or not
+    if(!firstname || !lastname || !password || !email){
+      return NextResponse.json({
+        message:"No customer data provided",
+        success:false
+      },{
+        status:404
+      })
+    }
+
     //check if customer is existing or not
     const customer = await CustomerModel.findOne({
       email,

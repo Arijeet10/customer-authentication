@@ -41,36 +41,44 @@ const SigninForm = () => {
 
   //sign in with customer credentials
   const handleSubmit = async () => {
-    console.log(signinData);
+    //console.log(signinData);
 
-    try {
-      setLoading(true);
+    if(signinData.email=="" || signinData.password==""){
+      toast.error("Please enter your credentials to login")
+    }else{
 
-      //api request
-      const res = await axios.post<ApiResponse>("/api/auth/login", signinData);
-
-      //login successful
-      if (res.status) {
-        toast.success(res.data.message);
-        setSigninData({
-          email: "",
-          password: "",
-        });
-
-        router.push(`/`);
+      try {
+        setLoading(true);
+  
+        //api request
+        const res = await axios.post<ApiResponse>("/api/auth/login", signinData);
+  
+        //login successful
+        if (res.status) {
+          toast.success(res.data.message);
+          setSigninData({
+            email: "",
+            password: "",
+          });
+  
+          router.push(`/`);
+        }
+  
+      } catch (error) {
+        //login unsuccessful
+        console.log(error);
+        const axiosError=error as AxiosError<ApiResponse>;
+        let errorMsg=axiosError.response?.data.message;
+  
+        toast.error("Login Error: "+errorMsg,{duration:3000})
+  
+      } finally {
+        setLoading(false);
       }
 
-    } catch (error) {
-      //login unsuccessful
-      console.log(error);
-      const axiosError=error as AxiosError<ApiResponse>;
-      let errorMsg=axiosError.response?.data.message;
-
-      toast.error("Login Error: "+errorMsg,{duration:3000})
-
-    } finally {
-      setLoading(false);
     }
+
+
   };
 
   return (
@@ -92,6 +100,7 @@ const SigninForm = () => {
             <input
               type="email"
               placeholder="Email"
+              required
               className="w-full focus:outline-none"
               value={signinData.email}
               onChange={(e) =>
@@ -106,6 +115,7 @@ const SigninForm = () => {
               type={inputType}
               placeholder="Password"
               className="w-full focus:outline-none "
+              required
               value={signinData.password}
               onChange={(e) =>
                 setSigninData({ ...signinData, password: e.target.value })

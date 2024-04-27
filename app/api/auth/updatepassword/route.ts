@@ -26,6 +26,16 @@ export async function POST(req:NextRequest){
         //get new password
         const {newPassword}=await req.json()
 
+        // check if new password is given
+        if(!newPassword){
+            return NextResponse.json({
+                message:"No new password given to update",
+                success:false
+            },{
+                status:404
+            })
+        }
+
         //check if the new password is same or not
         const samePassword=await bcrypt.compare(newPassword,customer.password)
         if(samePassword){

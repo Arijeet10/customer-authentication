@@ -82,30 +82,42 @@ const SignupForm = () => {
   //sign in with customer credentials
   const handleSubmit = async () => {
     console.log(signupData);
-    try {
-      setLoading(true);
 
-      //api request
-      const res = await axios.post("/api/auth/register", signupData);
+    if(signupData.email==""||signupData.firstname==""||signupData.lastname==""||signupData.password==""){
+      toast.error("Please fill all the required data")
+    }else if(signupData.password!==confirmPassword){
+      toast.error("Passwords do not match")
+    }else{
 
-      //signup successful
-      if (res.data.success) {
-        toast.success(res.data.message);
-        router.push(`/verify/${signupData.email}`);
-      } else {
-        toast.error(res.data.message);
+      try {
+        setLoading(true);
+  
+        //api request
+        const res = await axios.post("/api/auth/register", signupData);
+  
+        //signup successful
+        if (res.data.success) {
+          toast.success(res.data.message);
+          router.push(`/verify/${signupData.email}`);
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        //signup unsuccessful
+        console.log(error);
+        const axiosError=error as AxiosError<ApiResponse>;
+        let errorMsg=axiosError.response?.data.message;
+  
+        toast.error("Sign up Error: "+errorMsg,{duration:3000})
+        
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      //signup unsuccessful
-      console.log(error);
-      const axiosError=error as AxiosError<ApiResponse>;
-      let errorMsg=axiosError.response?.data.message;
 
-      toast.error("Sign up Error: "+errorMsg,{duration:3000})
-      
-    } finally {
-      setLoading(false);
+
     }
+
+
   };
 
   return (

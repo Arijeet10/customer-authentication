@@ -14,6 +14,16 @@ export async function POST(req:NextRequest){
         //get the customer data from api request
         const {email,password}=await req.json();
 
+        //check if data is given or not
+        if(!password || !email){
+        return NextResponse.json({
+          message:"No login credentials provided",
+          success:false
+        },{
+          status:404
+        })
+      }
+
         //get account from database linked with the email 
         const customer=await CustomerModel.findOne({email});
 

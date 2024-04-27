@@ -10,6 +10,16 @@ export async function POST(req:NextRequest){
         const {email,verifyCode}=await req.json();
         // console.log(email,verifyCode)
 
+        //check if no data is given
+        if(!email||!verifyCode){
+            return NextResponse.json({
+                message:"Otp and Email invalid",
+                success:false
+            },{
+                status:404
+            })
+        }
+
         //get the account from database
         const customer=await CustomerModel.findOne({email}).select("-password")
 
