@@ -64,7 +64,7 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
     return ( 
         <>
         <Toaster />
-        <div className="p-2 flex items-center justify-between shadow-lg">
+        <div className="p-2 sm:px-6 sm:py-2 flex items-center justify-between shadow-lg">
           <div className="text-2xl">Welcome <span className="text-[#3A244A] font-semibold">{customer?.firstname}</span></div>
           <div className="flex items-center justify-center gap-4">
             <div className="hidden  sm:border sm:flex sm:items-center sm:rounded-md">

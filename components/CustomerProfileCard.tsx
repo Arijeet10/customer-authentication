@@ -93,7 +93,7 @@ const CustomerProfileCard = ({
           </div>
 
           {/* customer first name and lastname */}
-          <div className="py-4 flex items-center justify-between gap-2">
+          <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="w-full">
               <div>First Name</div>
               <div className="p-2 border rounded-md text-slate-500">
@@ -109,7 +109,7 @@ const CustomerProfileCard = ({
           </div>
 
           {/* customer email address and phone number */}
-          <div className="py-4 flex items-center justify-between gap-2">
+          <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="w-full">
               <div className="py-2 relative flex items-center gap-2">
                 <div className="">Email Address</div>
@@ -154,7 +154,7 @@ const CustomerProfileCard = ({
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
               <div className="w-full">
                 <div>New Password</div>
                 <input
