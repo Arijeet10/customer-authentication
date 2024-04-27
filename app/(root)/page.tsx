@@ -18,7 +18,8 @@ const Homepage = () => {
     console.log(customer);
   }, [customer]);
 
-
+  
+//function to get customer details
   const fetchCustomerDetails=async()=>{
     try {
       setLoading(true)
