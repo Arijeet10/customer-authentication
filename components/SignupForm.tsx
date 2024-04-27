@@ -129,12 +129,12 @@ const SignupForm = () => {
 
           {/* link to go to Sign in page */}
           <div className=" relative font-medium ">
-            <button onClick={() => router.push("/login")} className="z-50 flex items-center">
+            <button onClick={() => router.push("/login")} className="z-50 flex items-center text-[#3A244A]">
               Sign <span className="text-[#D72638] ">In</span>
             </button>
 
             {/* underline the link text effect */}
-            <div className=" absolute bottom-[4px] w-full py-[0.5px] bg-gradient-to-r from-black from-75% to-[#D72638] to-25%">
+            <div className=" absolute bottom-[4px] w-full py-[0.5px] bg-gradient-to-r from-[#3A244A] from-75% to-[#D72638] to-25%">
               <div className="border-b-1 border-transparent w-full" />
             </div>
           </div>
