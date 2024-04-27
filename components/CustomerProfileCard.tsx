@@ -21,7 +21,7 @@ const CustomerProfileCard = ({ customer }: { customer: Customer }) => {
 
   const handleUpdatePassword=async()=>{
 
-    if(newPassword==confirmNewPassword){
+    if(newPassword===confirmNewPassword){
 
       const payload={newPassword}
 
@@ -47,6 +47,8 @@ const CustomerProfileCard = ({ customer }: { customer: Customer }) => {
         toast.error("Error in updating Password")
 
       }
+    }else{
+      toast.error("Password do not match")
     }
   }
 
@@ -114,7 +116,7 @@ const CustomerProfileCard = ({ customer }: { customer: Customer }) => {
                     <div className="text-red-500">Not Verified</div>
 
                     {/* option to verify email */}
-                    <button onClick={()=>router.push("/verify")} className="hover:text-blue-500 font-medium border-b hover:border-blue-500">
+                    <button onClick={()=>router.push(`/verify/${customer?.email}`)} className="hover:text-blue-500 font-medium border-b hover:border-blue-500">
                       Verify
                     </button>
 

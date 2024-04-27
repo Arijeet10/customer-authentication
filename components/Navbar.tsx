@@ -64,6 +64,8 @@ const Navbar = ({customer}:{customer:Customer}) => {
                 className="w-5 h-5 text-[#3A244A]"
               />
             </div>
+
+            {/* Logout button */}
           <div onClick={()=>setModal(true)} className="p-2 flex items-center justify-center gap-2 font-medium rounded-md bg-[#3A244A] text-[#ffffff] cursor-pointer">
             <div>Log Out</div>
             <div>
@@ -74,6 +76,8 @@ const Navbar = ({customer}:{customer:Customer}) => {
           </div>
           </div>
         </div>
+
+        {/* Confirm Password Pop up */}
         {modal && (
             <div className="p-2 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] shadow-lg border rounded-md bg-white z-50">
                 <div className="py-4">Confirm Log Out?</div>
@@ -84,6 +88,7 @@ const Navbar = ({customer}:{customer:Customer}) => {
             </div>
         )}
 
+        {/* Background darken when pop up appears */}
         {modal && (
             <div onClick={()=>setModal(false)} className="fixed inset-0 bg-[rgba(0,0,0,0.7)]" />
         )}
