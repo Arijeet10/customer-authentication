@@ -11,6 +11,8 @@ import toast, { Toaster } from "react-hot-toast";
 const Homepage = () => {
   const [customer, setCustomer] = useState<Customer>();
 
+  const [loading,setLoading]=useState(false);
+
   useEffect(() => {
     console.log(customer);
   }, [customer]);
@@ -19,6 +21,7 @@ const Homepage = () => {
   useEffect(() => {
     (async function getCustomerDetails() {
       try {
+        setLoading(true)
         //get customer details api request
         const res = await axios.get("/api/auth/customer");
 
@@ -33,6 +36,8 @@ const Homepage = () => {
         //customer details fetching unsuccessful
         console.log(error);
         toast.error("Error fetching Customer Details");
+      }finally{
+        setLoading(false)
       }
     })();
   }, []);
@@ -41,15 +46,24 @@ const Homepage = () => {
     <>
       <Toaster />
       <div>
-
-        <div>
+        {loading ? (
+          <div className="absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]">
+            Loading
+          </div>
+        ):(
+          <>
+          <div>
           <Navbar customer={customer} />
         </div>
 
         {/* Edit Customer Profile */}
         <div className="p-8">
           <CustomerProfileCard customer={customer} />
-        </div>
+        </div> 
+          </>
+        )}
+
+
 
       </div>
     </>

@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ImUserPlus } from "react-icons/im";
+import { IoCheckmark } from "react-icons/io5";
 
-const CustomerProfileCard = ({ customer }: { customer: Customer }) => {
+const CustomerProfileCard = ({ customer }: { customer: Customer|undefined }) => {
 
   //for navigation
   const router=useRouter();
@@ -105,12 +106,14 @@ const CustomerProfileCard = ({ customer }: { customer: Customer }) => {
           {/* customer email address and phone number */}
           <div className="py-4 flex items-center justify-between gap-2">
             <div className="w-full">
-              <div className="py-2 flex items-center gap-2">
-                <div>Email Address</div>
+              <div className="py-2 relative flex items-center gap-2">
+                <div className="">Email Address</div>
 
                 {/* Email Verification */}
                 {customer?.isVerified ? (
-                  <div className="text-blue-500">Verified</div>
+                  <div className="border rounded-full border-blue-500 absolute left-[100px] top-[12px]">
+                    <IoCheckmark className="w-4 h-4 text-blue-500" />
+                  </div>
                 ) : (
                   <div className="flex items-center gap-2 text-sm italic">
                     <div className="text-red-500">Not Verified</div>

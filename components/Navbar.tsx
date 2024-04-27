@@ -8,7 +8,7 @@ import toast,{Toaster} from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const Navbar = ({customer}:{customer:Customer}) => {
+const Navbar = ({customer}:{customer:Customer|undefined}) => {
 
     //for navigation
     const router=useRouter();
