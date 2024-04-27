@@ -14,9 +14,9 @@ const Homepage = () => {
 
   const [loading,setLoading]=useState(false);
 
-  // useEffect(() => {
-  //   console.log(customer);
-  // }, [customer]);
+  useEffect(() => {
+    console.log(customer);
+  }, [customer]);
 
   //fetch customer details when page renders
   useEffect(() => {
@@ -25,6 +25,8 @@ const Homepage = () => {
         setLoading(true)
         //get customer details api request
         const res = await axios.get("/api/auth/customer");
+
+        console.log(res)
 
         if (res.status) {
           //customer details fetching successful
