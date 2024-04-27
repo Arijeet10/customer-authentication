@@ -23,7 +23,7 @@ export async function POST(req:NextRequest){
                 success:false,
                 message:"Account doesn't exist"
             },{
-                status:400
+                status:404
             })
         }
 

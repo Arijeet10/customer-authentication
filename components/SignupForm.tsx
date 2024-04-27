@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { PiEyeSlash } from "react-icons/pi";
 import { PiEyeLight } from "react-icons/pi";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { ApiResponse } from "@/types/ApiResponse";
 
 const SignupForm = () => {
   const [loading, setLoading] = useState(false);
@@ -97,7 +98,11 @@ const SignupForm = () => {
     } catch (error) {
       //signup unsuccessful
       console.log(error);
-      toast.error("Sign up Error!");
+      const axiosError=error as AxiosError<ApiResponse>;
+      let errorMsg=axiosError.response?.data.message;
+
+      toast.error("Sign up Error: "+errorMsg,{duration:3000})
+      
     } finally {
       setLoading(false);
     }

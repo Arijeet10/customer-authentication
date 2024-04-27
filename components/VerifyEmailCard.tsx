@@ -1,6 +1,7 @@
 "use client";
 
-import axios from "axios";
+import { ApiResponse } from "@/types/ApiResponse";
+import axios, { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -35,7 +36,11 @@ const VerifyEmailCard = () => {
     } catch (error) {
       //verification unsuccessful
       console.log(error);
-      toast.error("Customer Verification Error!");
+      
+      const axiosError=error as AxiosError<ApiResponse>;
+      let errorMsg=axiosError.response?.data.message;
+
+      toast.error("Verification Error: "+errorMsg,{duration:3000})
     }
   };
 

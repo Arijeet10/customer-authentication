@@ -1,13 +1,14 @@
 "use client";
 
 import { Customer } from "@/libs/models/CustomerModel";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ImUserPlus } from "react-icons/im";
 import { IoCheckmark } from "react-icons/io5";
 import Loading from "./Loading";
+import { ApiResponse } from "@/types/ApiResponse";
 
 const CustomerProfileCard = ({
   customer,
@@ -44,9 +45,12 @@ const CustomerProfileCard = ({
           toast.error(res.data.message);
         }
       } catch (error) {
-        //update password unsuccessful
-        console.log(error);
-        toast.error("Error in updating Password");
+      //update password unsuccessful
+      console.log(error);
+      const axiosError=error as AxiosError<ApiResponse>;
+      let errorMsg=axiosError.response?.data.message;
+
+      toast.error("Password Update Error: "+errorMsg,{duration:3000})
       } finally {
         setLoading(false);
       }

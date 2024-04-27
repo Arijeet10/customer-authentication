@@ -1,4 +1,3 @@
-// import { resend } from "@/libs/resend";
 
 import nodemailer from "nodemailer"
 import { render } from "@react-email/render"; 
@@ -23,7 +22,6 @@ export async function sendVerificationMail(
 ):Promise<ApiResponse>{
 
     const emailHtml=render(VerificationEmail({firstname,otp:verifyCode}))
-    console.log(emailHtml)
 
     try {
 

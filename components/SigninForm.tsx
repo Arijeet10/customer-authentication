@@ -1,11 +1,12 @@
 "use client";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PiEyeSlash } from "react-icons/pi";
 import { PiEyeLight } from "react-icons/pi";
 import toast, { Toaster } from "react-hot-toast";
+import { ApiResponse } from "@/types/ApiResponse";
 
 const SigninForm = () => {
 
@@ -46,10 +47,10 @@ const SigninForm = () => {
       setLoading(true);
 
       //api request
-      const res = await axios.post("/api/auth/login", signinData);
+      const res = await axios.post<ApiResponse>("/api/auth/login", signinData);
 
       //login successful
-      if (res.data.success) {
+      if (res.status) {
         toast.success(res.data.message);
         setSigninData({
           email: "",
@@ -57,13 +58,16 @@ const SigninForm = () => {
         });
 
         router.push(`/`);
-      } else {
-        toast.error(res.data.message);
       }
+
     } catch (error) {
       //login unsuccessful
       console.log(error);
-      toast.error("Sign in Error!");
+      const axiosError=error as AxiosError<ApiResponse>;
+      let errorMsg=axiosError.response?.data.message;
+
+      toast.error("Login Error: "+errorMsg,{duration:3000})
+
     } finally {
       setLoading(false);
     }
