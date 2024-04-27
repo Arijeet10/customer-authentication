@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const VerifyEmailCard = () => {
 
-  const [loading,setLoading]=useState(false);
+  const [loading,setLoading]=useState(true);
 
   //get email from parameter
   const { email } = useParams<{ email: string }>();
@@ -95,7 +95,7 @@ const VerifyEmailCard = () => {
 
         <div className="font-medium flex flex-col gap-2">
           {loading ? (
-            <div className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]">Verifying Customer Email</div>
+            <div className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">Verifying Customer Email</div>
           ):(
             <>
             {/* Sign up button */}
