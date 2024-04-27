@@ -5,9 +5,10 @@ import { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
 import toast,{Toaster} from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import Loading from "./Loading";
+import { ApiResponse } from "@/types/ApiResponse";
 
 const Navbar = ({customer}:{customer:Customer|undefined}) => {
 
@@ -38,17 +39,17 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
             //go to login page
             router.push("/login")
             
-          }else{
-
-            //logout unsuccessful
-            toast.error(res.data.message)
           }
 
         } catch (error) {
 
           //logout error
           console.log(error)
-          toast.error("Logout Error: Something went wrong!")
+          const axiosError=error as AxiosError<ApiResponse>;
+          let errorMsg=axiosError.response?.data.message;
+    
+          toast.error("Logout Error: "+errorMsg,{duration:3000})
+          
         } finally{
           setLoading(false)
         }
