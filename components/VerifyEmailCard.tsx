@@ -67,7 +67,7 @@ const VerifyEmailCard = () => {
 
           {/* link to go to Sign in page */}
           <div className=" relative font-medium ">
-            <button onClick={() => router.push("/login")} className="z-50 ">
+            <button onClick={() => router.push("/login")} className="flex items-center z-50 ">
               Sign <span className="text-[#D72638] ">In</span>
             </button>
 
