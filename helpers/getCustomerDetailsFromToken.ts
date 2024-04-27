@@ -1,5 +1,5 @@
 import connectMongoDb from '@/libs/connectDb';
-import CustomerModel, { Customer } from '@/libs/models/CustomerModel';
+import CustomerModel from '@/libs/models/CustomerModel';
 import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 

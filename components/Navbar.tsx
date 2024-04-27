@@ -89,9 +89,14 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
           </div>
         </div>
 
+        {/* Background darken when pop up appears */}
+        {modal && (
+            <div onClick={()=>setModal(false)} className="fixed inset-0 bg-[rgba(0,0,0,0.7)] z-50" />
+        )}
+
         {/* Confirm Password Pop up */}
         {modal && (
-            <div className="p-2 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] shadow-lg border rounded-md bg-white z-50">
+            <div className="p-2 fixed top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] shadow-lg border rounded-md bg-white z-50">
                 <div className="py-4">Confirm Log Out?</div>
                 <div className="flex items-center justify-between font-medium">
                     <button onClick={()=>handleLogOut()} className="p-2 rounded-md bg-[#3A244A] text-[#ffffff]">Yes</button>
@@ -100,10 +105,7 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
             </div>
         )}
 
-        {/* Background darken when pop up appears */}
-        {modal && (
-            <div onClick={()=>setModal(false)} className="fixed inset-0 bg-[rgba(0,0,0,0.7)]" />
-        )}
+
         </>
      );
 }
