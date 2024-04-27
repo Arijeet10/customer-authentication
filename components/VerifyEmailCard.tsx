@@ -86,7 +86,7 @@ const VerifyEmailCard = () => {
               type="text"
               placeholder="Enter Verification Code"
               required
-              className="p-2 focus:outline-none"
+              className="p-2 w-full focus:outline-none"
               value={verifyCode}
               onChange={(e) => setVerifyCode(e.target.value)}
             />
