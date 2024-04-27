@@ -113,11 +113,7 @@ const SignupForm = () => {
       } finally {
         setLoading(false);
       }
-
-
     }
-
-
   };
 
   return (
@@ -133,7 +129,7 @@ const SignupForm = () => {
 
           {/* link to go to Sign in page */}
           <div className=" relative font-medium ">
-            <button onClick={() => router.push("/login")} className="z-50 ">
+            <button onClick={() => router.push("/login")} className="z-50 flex items-center">
               Sign <span className="text-[#D72638] ">In</span>
             </button>
 

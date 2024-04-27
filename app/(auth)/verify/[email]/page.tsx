@@ -5,16 +5,16 @@ const VerifyEmail = () => {
     <>
       <div className="w-screen h-screen flex flex-col sm:flex-row items-center justify-center sm:justify-between">
         {/* Sign up illustration */}
-        <div className="w-full sm:h-full flex justify-center items-center">
+        <div className="w-full md:w-[50%] lg:w-[65%] sm:h-[50%] md:h-[80%] lg:h-full flex justify-center items-center">
           <img
             src="/sign-up.png"
             alt="signin illustration"
-            className=" h-60 w-full sm:h-[700px] md:h-full object-cover"
+            className=" h-full w-full object-cover"
           />
         </div>
 
         {/* Sign up form */}
-        <div className="w-full p-4">
+        <div className="w-full  md:w-[50%] lg:w-[35%] p-4">
           <VerifyEmailCard />
         </div>
       </div>
