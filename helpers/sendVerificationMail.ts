@@ -8,9 +8,7 @@ import { ApiResponse } from "@/types/ApiResponse";
 
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
+    service: "Gmail",
     auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASS,
@@ -25,6 +23,7 @@ export async function sendVerificationMail(
 ):Promise<ApiResponse>{
 
     const emailHtml=render(VerificationEmail({firstname,otp:verifyCode}))
+    console.log(emailHtml)
 
     try {
 
