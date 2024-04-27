@@ -7,11 +7,13 @@ import { PiEyeSlash } from "react-icons/pi";
 import { PiEyeLight } from "react-icons/pi";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const SigninForm = () => {
 
+
+  const [loading, setLoading] = useState(false);
+
   //for navigation
-  const router=useRouter();
+  const router = useRouter();
 
   //to store form inputs
   const [signinData, setSigninData] = useState({
@@ -37,40 +39,41 @@ const SigninForm = () => {
   };
 
   //sign in with customer credentials
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     console.log(signinData);
 
     try {
-      
-      //api request
-      const res=await axios.post("/api/auth/login",signinData);
+      setLoading(true);
 
+      //api request
+      const res = await axios.post("/api/auth/login", signinData);
 
       //login successful
-      if(res.data.success){
-        toast.success(res.data.message)
-        router.push(`/`)
-      }else{
-        toast.error(res.data.message)
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setSigninData({
+          email: "",
+          password: "",
+        });
+
+        router.push(`/`);
+      } else {
+        toast.error(res.data.message);
       }
-
     } catch (error) {
-
       //login unsuccessful
       console.log(error);
-      toast.error("Sign in Error!")
+      toast.error("Sign in Error!");
+    } finally {
+      setLoading(false);
     }
-
   };
 
   return (
     <>
+      <Toaster />
 
-    <Toaster />
-
-      <div
-        className="px-8 py-6 border rounded-lg shadow-lg"
-      >
+      <div className="px-8 py-6 border rounded-lg shadow-lg">
         {/* Form Header */}
         <div className="font-bold text-3xl">
           <div>
@@ -118,25 +121,30 @@ const SigninForm = () => {
 
         {/* Sign in and Sign up buttons */}
         <div className="font-medium flex flex-col gap-2">
-          {/* Sign in button */}
-          <button
-            className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
-            onClick={()=>handleSubmit()}
-          >
-            Sign in
-            </button>
+          {loading ? (
+            <div className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">
+              Logging in...
+            </div>
+          ) : (
+            <>
+              {/* Sign in button */}
+              <button
+                className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
+                onClick={() => handleSubmit()}
+              >
+                Sign in
+              </button>
 
-          {/* Sign up button to go Sign in page */}
-          <button
-            onClick={()=>router.push("/register")}
-            className="p-2 text-center rounded-lg border border-[#3A244A] text-[#3A244A]"
-          >
-            Sign Up
-          </button>
-
+              {/* Sign up button to go Sign in page */}
+              <button
+                onClick={() => router.push("/register")}
+                className="p-2 text-center rounded-lg border border-[#3A244A] text-[#3A244A]"
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
-
-        
       </div>
     </>
   );

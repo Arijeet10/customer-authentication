@@ -9,6 +9,8 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignupForm = () => {
+  const [loading, setLoading] = useState(false);
+
   //for navigation
   const router = useRouter();
 
@@ -80,6 +82,8 @@ const SignupForm = () => {
   const handleSubmit = async () => {
     console.log(signupData);
     try {
+      setLoading(true);
+
       //api request
       const res = await axios.post("/api/auth/register", signupData);
 
@@ -93,7 +97,9 @@ const SignupForm = () => {
     } catch (error) {
       //signup unsuccessful
       console.log(error);
-      toast.error("Sign up Error!")
+      toast.error("Sign up Error!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -280,14 +286,22 @@ const SignupForm = () => {
           </div>
         </div>
 
-        {/* Sign up button */}
         <div className="font-medium flex flex-col gap-2">
-          <button
-            className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
-            onClick={() => handleSubmit()}
-          >
-            Sign Up
-          </button>
+          {loading ? (
+            <div className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">
+              Creating account...
+            </div>
+          ) : (
+            <>
+              {/* Sign up button */}
+              <button
+                className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
+                onClick={() => handleSubmit()}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>

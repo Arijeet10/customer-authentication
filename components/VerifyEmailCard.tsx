@@ -3,54 +3,45 @@
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import toast,{Toaster} from "react-hot-toast";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const VerifyEmailCard = () => {
+  //get email from parameter
+  const { email } = useParams<{ email: string }>();
+  const emailId = email?.replace("%40", "@");
+  console.log(emailId);
 
-    //get email from parameter
-    const {email} = useParams<{ email: string }>();
-    const emailId=email?.replace("%40","@")
-    console.log(emailId)
+  //for navigation
+  const router = useRouter();
 
-    //for navigation
-    const router=useRouter();
+  //store verification code input
+  const [verifyCode, setVerifyCode] = useState("");
 
-    //store verification code input
-    const [verifyCode,setVerifyCode]=useState("");
+  //verify customer
+  const handleSubmit = async () => {
+    console.log(emailId, verifyCode);
+    const payload = { email: emailId, verifyCode };
+    try {
+      //verify customer api request
+      const res = await axios.post("/api/auth/verify", payload);
 
-
-    //verify customer
-    const handleSubmit=async()=>{
-        console.log(emailId,verifyCode)
-        const payload={email:emailId,verifyCode}
-        try {
-
-          //verify customer api request
-          const res=await axios.post("/api/auth/verify",payload)
-
-          if(res.data.success){
-                      
-            //verification successful
-            toast.success(res.data.message)
-            router.push("/")
-          }else{
-            toast.error(res.data.message)
-          }
-
-        } catch (error) {
-          
-          //verification unsuccessful
-          console.log(error)
-          toast.error("Customer Verification Error!")
-        }
+      if (res.data.success) {
+        //verification successful
+        toast.success(res.data.message);
+        router.push("/");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      //verification unsuccessful
+      console.log(error);
+      toast.error("Customer Verification Error!");
     }
+  };
 
-
-    return ( 
-
-        <>
-        <Toaster />
+  return (
+    <>
+      <Toaster />
       <form
         onSubmit={(e) => e.preventDefault()}
         className="px-8 py-6 border rounded-lg shadow-lg"
@@ -63,7 +54,7 @@ const VerifyEmailCard = () => {
 
           {/* link to go to Sign in page */}
           <div className=" relative font-medium ">
-            <button onClick={()=>router.push("/login")} className="z-50 ">
+            <button onClick={() => router.push("/login")} className="z-50 ">
               Sign <span className="text-[#D72638] ">In</span>
             </button>
 
@@ -76,7 +67,6 @@ const VerifyEmailCard = () => {
 
         {/*-------- FORM INPUT ------- */}
         <div className="py-8 flex flex-col gap-4">
-
           {/* email verification code input */}
           <div className="border-b">
             <input
@@ -85,10 +75,9 @@ const VerifyEmailCard = () => {
               required
               className="p-2 focus:outline-none"
               value={verifyCode}
-              onChange={(e)=>setVerifyCode(e.target.value)}
+              onChange={(e) => setVerifyCode(e.target.value)}
             />
-          </div>    
-
+          </div>
         </div>
 
         {/* Sign up button */}
@@ -97,14 +86,12 @@ const VerifyEmailCard = () => {
             type="submit"
             value="Sign Up"
             className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
-            onClick={()=>handleSubmit()}
+            onClick={() => handleSubmit()}
           />
         </div>
-
       </form>
-        </>
+    </>
+  );
+};
 
-     );
-}
- 
 export default VerifyEmailCard;

@@ -1,6 +1,7 @@
 "use client";
 
 import CustomerProfileCard from "@/components/CustomerProfileCard";
+import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import { Customer } from "@/libs/models/CustomerModel";
 import axios from "axios";
@@ -47,9 +48,7 @@ const Homepage = () => {
       <Toaster />
       <div>
         {loading ? (
-          <div className="absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]">
-            Loading
-          </div>
+          <Loading />
         ):(
           <>
           <div>

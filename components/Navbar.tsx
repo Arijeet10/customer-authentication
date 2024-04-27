@@ -7,8 +7,11 @@ import { CiSearch } from "react-icons/ci";
 import toast,{Toaster} from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Loading from "./Loading";
 
 const Navbar = ({customer}:{customer:Customer|undefined}) => {
+
+    const [loading,setLoading]=useState(false);
 
     //for navigation
     const router=useRouter();
@@ -21,6 +24,8 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
         console.log("logging out")
 
         try {
+
+          setLoading(true)
           
           //logout api request
           const res=await axios.get("/api/auth/logout")
@@ -44,8 +49,15 @@ const Navbar = ({customer}:{customer:Customer|undefined}) => {
           //logout error
           console.log(error)
           toast.error("Logout Error: Something went wrong!")
+        } finally{
+          setLoading(false)
         }
 
+    }
+
+    //loading screen
+    if(loading){
+      return <Loading />
     }
 
     return ( 

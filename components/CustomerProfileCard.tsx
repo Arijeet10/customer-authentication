@@ -7,57 +7,59 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ImUserPlus } from "react-icons/im";
 import { IoCheckmark } from "react-icons/io5";
+import Loading from "./Loading";
 
-const CustomerProfileCard = ({ customer }: { customer: Customer|undefined }) => {
+const CustomerProfileCard = ({
+  customer,
+}: {
+  customer: Customer | undefined;
+}) => {
+  const [loading, setLoading] = useState(false);
 
   //for navigation
-  const router=useRouter();
+  const router = useRouter();
 
   //to store new password
-  const [newPassword,setNewPassword]=useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   //to store confirm password
-  const [confirmNewPassword,setConfirmNewPassword]=useState("")
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-
-  const handleUpdatePassword=async()=>{
-
-    if(newPassword===confirmNewPassword){
-
-      const payload={newPassword}
+  const handleUpdatePassword = async () => {
+    if (newPassword === confirmNewPassword) {
+      const payload = { newPassword };
 
       try {
-        
+        setLoading(true);
+
         //api request to update password
-        const res=await axios.post("/api/auth/updatepassword",payload)
+        const res = await axios.post("/api/auth/updatepassword", payload);
 
-        if(res.data.success){
-
+        if (res.data.success) {
           //update password successful
-          toast.success(res.data.message)
-          setNewPassword("")
-          setConfirmNewPassword("")
-        }else{
-          toast.error(res.data.message)
+          toast.success(res.data.message);
+          setNewPassword("");
+          setConfirmNewPassword("");
+        } else {
+          toast.error(res.data.message);
         }
-
       } catch (error) {
-
         //update password unsuccessful
-        console.log(error)
-        toast.error("Error in updating Password")
-
+        console.log(error);
+        toast.error("Error in updating Password");
+      } finally {
+        setLoading(false);
       }
-    }else{
-      toast.error("Password do not match")
+    } else {
+      toast.error("Password do not match");
     }
-  }
+  };
 
-  
+
 
   return (
     <>
-    <Toaster />
+      <Toaster />
       <div className="text-slate-700">
         <div className="text-3xl font-bold">Customer Profile</div>
         <div>
@@ -119,10 +121,12 @@ const CustomerProfileCard = ({ customer }: { customer: Customer|undefined }) => 
                     <div className="text-red-500">Not Verified</div>
 
                     {/* option to verify email */}
-                    <button onClick={()=>router.push(`/verify/${customer?.email}`)} className="hover:text-blue-500 font-medium border-b hover:border-blue-500">
+                    <button
+                      onClick={() => router.push(`/verify/${customer?.email}`)}
+                      className="hover:text-blue-500 font-medium border-b hover:border-blue-500"
+                    >
                       Verify
                     </button>
-
                   </div>
                 )}
               </div>
@@ -155,7 +159,7 @@ const CustomerProfileCard = ({ customer }: { customer: Customer|undefined }) => 
                   placeholder="New Password"
                   className="p-2 w-full border rounded-md text-slate-500 focus:outline-none"
                   value={newPassword}
-                  onChange={(e)=>setNewPassword(e.target.value)}
+                  onChange={(e) => setNewPassword(e.target.value)}
                 />
               </div>
 
@@ -166,15 +170,26 @@ const CustomerProfileCard = ({ customer }: { customer: Customer|undefined }) => 
                   placeholder="Retype Password"
                   className="p-2 w-full border rounded-md text-slate-500 focus:outline-none"
                   value={confirmNewPassword}
-                  onChange={(e)=>setConfirmNewPassword(e.target.value)}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
                 />
               </div>
             </div>
 
             <div>
-              <button onClick={()=>handleUpdatePassword()} className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]">
-                Update Password
-              </button>
+              {loading ? (
+                <button className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">
+                  Loading
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => handleUpdatePassword()}
+                    className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]"
+                  >
+                    Update Password
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
