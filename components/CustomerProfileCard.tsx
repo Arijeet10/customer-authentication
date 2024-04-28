@@ -25,8 +25,22 @@ const CustomerProfileCard = ({
   //to store confirm password
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
+  //function to update password
   const handleUpdatePassword = async () => {
-    if (newPassword === confirmNewPassword) {
+
+    if (newPassword == "") {
+
+      //return error if new password is empty
+      toast.error("Please enter new Password");
+
+    } else if (newPassword !== confirmNewPassword) {
+
+      //return error if password and confirm password matches or not
+      toast.error("Password do not match");
+
+    } else {
+
+      //update password
       const payload = { newPassword };
 
       try {
@@ -44,21 +58,18 @@ const CustomerProfileCard = ({
           toast.error(res.data.message);
         }
       } catch (error) {
-      //update password unsuccessful
-      //console.log(error);
-      const axiosError=error as AxiosError<ApiResponse>;
-      let errorMsg=axiosError.response?.data.message;
+        //update password unsuccessful
+        //console.log(error);
+        const axiosError = error as AxiosError<ApiResponse>;
+        let errorMsg = axiosError.response?.data.message;
 
-      toast.error("Password Update Error: "+errorMsg,{duration:3000})
+        toast.error("Password Update Error: " + errorMsg, { duration: 3000 });
       } finally {
         setLoading(false);
       }
-    } else {
-      toast.error("Password do not match");
+
     }
   };
-
-
 
   return (
     <>
@@ -160,6 +171,7 @@ const CustomerProfileCard = ({
                 <input
                   type="password"
                   placeholder="New Password"
+                  required
                   className="p-2 w-full border rounded-md text-slate-500 focus:outline-none"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -171,6 +183,7 @@ const CustomerProfileCard = ({
                 <input
                   type="password"
                   placeholder="Retype Password"
+                  required
                   className="p-2 w-full border rounded-md text-slate-500 focus:outline-none"
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
@@ -181,7 +194,7 @@ const CustomerProfileCard = ({
             <div>
               {loading ? (
                 <button className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">
-                  Loading
+                  Updating Password
                 </button>
               ) : (
                 <>
