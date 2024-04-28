@@ -92,7 +92,7 @@ const CustomerProfileCard = ({
               </div>
             </div>
 
-            <div className="flex items-center justify-between sm:gap-2">
+            <div className="flex items-center justify-between sm:gap-2 font-medium">
               <button className="p-2 rounded-lg bg-[#3A244A] text-[#ffffff]">
                 Upload New Photo
               </button>
@@ -106,13 +106,13 @@ const CustomerProfileCard = ({
           {/* customer first name and lastname */}
           <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="w-full">
-              <div>First Name</div>
+              <div className="pl-2">First Name</div>
               <div className="p-2 border rounded-md text-slate-500">
                 {customer?.firstname}
               </div>
             </div>
             <div className="w-full">
-              <div>First Name</div>
+              <div className="pl-2">Last Name</div>
               <div className="p-2 border rounded-md text-slate-500">
                 {customer?.lastname}
               </div>
@@ -123,7 +123,7 @@ const CustomerProfileCard = ({
           <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div className="w-full">
               <div className="py-2 relative flex items-center gap-2">
-                <div className="">Email Address</div>
+                <div className="pl-2">Email Address</div>
 
                 {/* Email Verification */}
                 {customer?.isVerified ? (
@@ -150,16 +150,22 @@ const CustomerProfileCard = ({
             </div>
 
             <div className=" w-full">
-              <div className="py-2">Phone Number</div>
+              <div className="pl-2 py-2">Phone Number</div>
               <div className="p-2 border rounded-md text-slate-500">
                 91xxxxxxxx
               </div>
             </div>
           </div>
 
+          {/* Customer Contact Mode */}
+          <div className="py-4">
+            <div className="pl-2">Contact Mode</div>
+            <div className="p-2 border rounded-md text-slate-500">{customer?.contact || "No Contacts Given"}</div>
+          </div>
+
           {/* Edit Account Password  */}
           <div className="py-4 flex flex-col gap-2">
-            <div>
+            <div className="py-2">
               <span className="text-lg font-medium border-b">
                 Edit Account Password
               </span>
@@ -167,7 +173,7 @@ const CustomerProfileCard = ({
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
               <div className="w-full">
-                <div>New Password</div>
+                <div className="pl-2">New Password</div>
                 <input
                   type="password"
                   placeholder="New Password"
@@ -179,7 +185,7 @@ const CustomerProfileCard = ({
               </div>
 
               <div className="w-full">
-                <div>Confirm Password</div>
+                <div className="pl-2">Confirm Password</div>
                 <input
                   type="password"
                   placeholder="Retype Password"
@@ -191,7 +197,7 @@ const CustomerProfileCard = ({
               </div>
             </div>
 
-            <div>
+            <div className="font-medium">
               {loading ? (
                 <button className="p-2 text-center rounded-lg bg-[#3A244A] text-[#ffffff]">
                   Updating Password

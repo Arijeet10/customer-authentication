@@ -31,7 +31,7 @@ export async function POST(req:NextRequest){
         if(!customer){
             return NextResponse.json({
                 success:false,
-                message:"Account doesn't exist"
+                message:"Wrong Email, Account doesn't exist!"
             },{
                 status:404
             })
